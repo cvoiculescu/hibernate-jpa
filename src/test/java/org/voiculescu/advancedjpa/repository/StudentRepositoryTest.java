@@ -2,6 +2,7 @@ package org.voiculescu.advancedjpa.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,6 +11,7 @@ import org.voiculescu.advancedjpa.AdvancedJpaApplication;
 import org.voiculescu.advancedjpa.entity.Passport;
 import org.voiculescu.advancedjpa.entity.Student;
 
+@Slf4j
 @SpringBootTest(classes = AdvancedJpaApplication.class)
 class StudentRepositoryTest {
 
@@ -28,6 +30,14 @@ class StudentRepositoryTest {
         passport.setNumber("E1234567");
         // update student
         student.setName("Test");
+    }
+
+    @Test
+    @Transactional
+    public void retrievePassportAndAssociatedStudent() {
+        Passport passport = em.find(Passport.class, 40001L);
+        log.info("password {}", passport);
+        log.info("student {}", passport.getStudent());
     }
 
 }
