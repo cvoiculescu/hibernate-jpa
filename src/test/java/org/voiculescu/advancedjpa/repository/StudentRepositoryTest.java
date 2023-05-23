@@ -1,0 +1,33 @@
+package org.voiculescu.advancedjpa.repository;
+
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
+import org.voiculescu.advancedjpa.AdvancedJpaApplication;
+import org.voiculescu.advancedjpa.entity.Passport;
+import org.voiculescu.advancedjpa.entity.Student;
+
+@SpringBootTest(classes = AdvancedJpaApplication.class)
+class StudentRepositoryTest {
+
+    @Autowired
+    EntityManager em;
+
+    @Test
+    @Transactional // creates a persistence context
+    @DirtiesContext
+    public void someTestToUnderstandPersistenceContext() {
+        // Retrieve student
+        Student student = em.find(Student.class, 20001L);
+        // Retrieve passport
+        Passport passport = student.getPassport();
+        // update passport
+        passport.setNumber("E1234567");
+        // update student
+        student.setName("Test");
+    }
+
+}

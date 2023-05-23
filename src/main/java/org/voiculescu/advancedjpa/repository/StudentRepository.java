@@ -4,7 +4,6 @@ import jakarta.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.voiculescu.advancedjpa.entity.Course;
 import org.voiculescu.advancedjpa.entity.Passport;
 import org.voiculescu.advancedjpa.entity.Student;
 

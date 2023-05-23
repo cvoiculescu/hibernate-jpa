@@ -25,6 +25,7 @@ public class Student {
 
     @ToString.Exclude
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn
+    @JoinColumn(name = "passport_id")
+    //    @OneToOne(fetch = FetchType.EAGER) // default fetching
     private Passport passport;
 }

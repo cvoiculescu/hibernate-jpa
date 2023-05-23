@@ -21,4 +21,8 @@ public class Passport {
     @Column(nullable = false)
     private String number;
 
+    @OneToOne(mappedBy = "passport")
+    @ToString.Exclude
+    Student student;
+
 }
