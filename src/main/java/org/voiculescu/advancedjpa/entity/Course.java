@@ -5,7 +5,9 @@ import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -30,13 +32,28 @@ public class Course {
     @Setter(AccessLevel.NONE)
     private List<Review> reviews = new ArrayList<>();
 
-    public void addReview(Review review){
+    @ManyToMany
+    @JoinTable(name = "course_student",
+            joinColumns = @JoinColumn(name = "course_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id"))
+    @Setter(AccessLevel.NONE)
+    private List<Student> students = new ArrayList<>();
+
+    public void addReview(Review review) {
         reviews.add(review);
     }
 
-    public Course removeReview(Review review){
+    public Course removeReview(Review review) {
         reviews.remove(review);
         return this;
+    }
+
+    public void addStudent(Student student) {
+        students.add(student);
+    }
+
+    public void removeStudent(Student student) {
+        students.remove(student);
     }
 
 }

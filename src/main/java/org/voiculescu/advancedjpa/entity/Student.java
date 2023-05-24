@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.Accessors;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "Student", indexes = {
         @Index(name = "idx_student_id", columnList = "id")
@@ -28,4 +31,17 @@ public class Student {
     @JoinColumn(name = "passport_id")
     //    @OneToOne(fetch = FetchType.EAGER) // default fetching
     private Passport passport;
+
+    @ManyToMany(mappedBy = "students")
+    @ToString.Exclude
+    @Setter(AccessLevel.NONE)
+    List<Course> courses = new ArrayList<>();
+
+    public void addCourse(Course course){
+        courses.add(course);
+    }
+
+    public void removeCourse(Course course){
+        courses.remove(course);
+    }
 }
