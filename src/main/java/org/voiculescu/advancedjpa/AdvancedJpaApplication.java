@@ -9,6 +9,8 @@ import org.voiculescu.advancedjpa.entity.Course;
 import org.voiculescu.advancedjpa.entity.Review;
 import org.voiculescu.advancedjpa.repository.CourseRepository;
 
+import java.util.List;
+
 @Slf4j
 @SpringBootApplication
 public class AdvancedJpaApplication implements CommandLineRunner {
@@ -25,6 +27,8 @@ public class AdvancedJpaApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        courseRepository.addReviewsForCourse();
+        Review review1 = new Review().setRating("5").setDescription("Nice course");
+        Review review2 = new Review().setRating("5").setDescription("Nice course");
+        courseRepository.addReviewsForCourse(10001L, List.of(review1, review2));
     }
 }

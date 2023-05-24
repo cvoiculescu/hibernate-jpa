@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.voiculescu.advancedjpa.entity.Course;
 import org.voiculescu.advancedjpa.entity.Review;
 
+import java.util.List;
+
 @Slf4j
 @Repository
 @Transactional
@@ -55,7 +57,7 @@ public class CourseRepository {
         em.clear();
     }
 
-    public void addReviewsForCourse() {
+    public void addHardcodedReviewsForCourse() {
         // retrieve course
         Course course = em.find(Course.class, 10002L);
         log.info("Reviews: {}", course.getReviews());
@@ -67,6 +69,17 @@ public class CourseRepository {
         // persist reviews
         em.persist(review1);
         em.persist(review2);
+    }
+
+    public void addReviewsForCourse(Long courseId, List<Review> reviews) {
+        Course course = em.find(Course.class, courseId);
+        log.info("Reviews: {}", course.getReviews());
+        reviews.forEach(review -> {
+            review.setCourse(course);
+            course.addReview(review);
+            em.persist(review);
+        });
+
     }
 
 }
