@@ -63,6 +63,19 @@ class StudentRepositoryTest {
             log.info("{}",course);
             course.getStudents().forEach(student->log.info("{}",student));
         }
+
+        @Test
+        @Transactional
+        public void insertStudentAndCourse(){
+            Student student = new Student().setName("Test");
+            Course course = new Course().setName("Microservices");
+            entityManager.persist(student);
+            entityManager.persist(course);
+            student.addCourse(course);
+            course.addStudent(student);
+            entityManager.persist(course);
+        }
+
     }
 
 }
