@@ -30,9 +30,8 @@ public class Course {
     @Setter(AccessLevel.NONE)
     private List<Review> reviews = new ArrayList<>();
 
-    public Course addReview(Review review){
+    public void addReview(Review review){
         reviews.add(review);
-        return this;
     }
 
     public Course removeReview(Review review){
