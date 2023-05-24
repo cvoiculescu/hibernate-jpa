@@ -2,6 +2,7 @@ package org.voiculescu.advancedjpa.repository;
 
 import jakarta.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.voiculescu.advancedjpa.entity.Course;
@@ -11,8 +12,9 @@ import org.voiculescu.advancedjpa.entity.Course;
 @Transactional
 public class CourseRepository {
 
-    final EntityManager em;
+    private final EntityManager em;
 
+    @Autowired
     public CourseRepository(EntityManager em) {
         this.em = em;
     }
@@ -36,7 +38,7 @@ public class CourseRepository {
         return course;
     }
 
-    public void playWithEntityManager(){
+    public void playWithEntityManager() {
         log.info("play with em start");
         Course course1 = new Course().setName("Course1");
         em.persist(course1);

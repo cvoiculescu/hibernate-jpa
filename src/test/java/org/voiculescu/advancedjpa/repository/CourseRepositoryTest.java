@@ -40,7 +40,12 @@ class CourseRepositoryTest {
         repository.save(course1);
         Course storedCourse1 = repository.findById(course1.getId());
         assertEquals("Test",storedCourse1.getName());
+    }
 
+    @Test
+    @DirtiesContext
+    public void playWith(){
+        repository.playWithEntityManager();
     }
 
 }

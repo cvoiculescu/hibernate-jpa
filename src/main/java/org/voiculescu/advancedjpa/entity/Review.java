@@ -22,4 +22,7 @@ public class Review {
 
     private String rating;
 
+    @ManyToOne
+    private Course course;
+
 }

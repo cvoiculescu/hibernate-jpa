@@ -2,6 +2,7 @@ package org.voiculescu.advancedjpa.repository;
 
 import jakarta.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.voiculescu.advancedjpa.entity.Passport;
@@ -12,8 +13,9 @@ import org.voiculescu.advancedjpa.entity.Student;
 @Transactional
 public class StudentRepository {
 
-    final EntityManager em;
+    private final EntityManager em;
 
+    @Autowired
     public StudentRepository(EntityManager em) {
         this.em = em;
     }
