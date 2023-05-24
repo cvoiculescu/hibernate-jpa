@@ -37,6 +37,7 @@ public class Course {
             joinColumns = @JoinColumn(name = "course_id"),
             inverseJoinColumns = @JoinColumn(name = "student_id"))
     @Setter(AccessLevel.NONE)
+    @ToString.Exclude
     private List<Student> students = new ArrayList<>();
 
     public void addReview(Review review) {

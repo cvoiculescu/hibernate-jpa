@@ -3,11 +3,14 @@ package org.voiculescu.advancedjpa.repository;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.voiculescu.advancedjpa.AdvancedJpaApplication;
+import org.voiculescu.advancedjpa.entity.Course;
 import org.voiculescu.advancedjpa.entity.Passport;
 import org.voiculescu.advancedjpa.entity.Student;
 
@@ -16,14 +19,16 @@ import org.voiculescu.advancedjpa.entity.Student;
 class StudentRepositoryTest {
 
     @Autowired
-    EntityManager em;
+    EntityManager entityManager;
+    @Autowired
+    StudentRepository repository;
 
     @Test
     @Transactional // creates a persistence context
     @DirtiesContext
     public void someTestToUnderstandPersistenceContext() {
         // Retrieve student
-        Student student = em.find(Student.class, 20001L);
+        Student student = entityManager.find(Student.class, 20001L);
         // Retrieve passport
         Passport passport = student.getPassport();
         // update passport
@@ -35,9 +40,29 @@ class StudentRepositoryTest {
     @Test
     @Transactional
     public void retrievePassportAndAssociatedStudent() {
-        Passport passport = em.find(Passport.class, 40001L);
+        Passport passport = entityManager.find(Passport.class, 40001L);
         log.info("password {}", passport);
         log.info("student {}", passport.getStudent());
+    }
+
+    @Nested
+    @DisplayName("Many To Many Testing for Students - Courses")
+    class ManyToMany {
+        @Test
+        @Transactional
+        public void retrieveStudentAndCourses() {
+            Student student = repository.findById(20001L);
+            log.info("{}", student);
+            student.getCourses().forEach(course -> log.info("{}", course));
+        }
+
+        @Test
+        @Transactional
+        public void retrieveCourseAndStudents() {
+            Course course = entityManager.find(Course.class, 10001L);
+            log.info("{}",course);
+            course.getStudents().forEach(student->log.info("{}",student));
+        }
     }
 
 }
