@@ -1,19 +1,26 @@
 package org.voiculescu.advancedjpa.repository;
 
+import jakarta.persistence.EntityManager;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.transaction.annotation.Transactional;
 import org.voiculescu.advancedjpa.AdvancedJpaApplication;
 import org.voiculescu.advancedjpa.entity.Course;
+import org.voiculescu.advancedjpa.entity.Review;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = AdvancedJpaApplication.class)
+@Slf4j
 class CourseRepositoryTest {
 
     @Autowired
     CourseRepository repository;
+    @Autowired
+    EntityManager entityManager;
 
     @Test
     public void findByIdTest() {
@@ -46,6 +53,20 @@ class CourseRepositoryTest {
     @DirtiesContext
     public void playWith(){
         repository.playWithEntityManager();
+    }
+
+    @Test
+    @Transactional
+    public void retrieveReviewsForCourse(){
+        Course course = repository.findById(10001L);
+        course.getReviews().forEach(review->log.info("{}",review));
+    }
+
+    @Test
+    @Transactional
+    public void retrieveCourseForReview(){
+        Review review = entityManager.find(Review.class,50001L);
+        log.info("{}",review.getCourse());
     }
 
 }
