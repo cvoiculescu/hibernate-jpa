@@ -13,7 +13,10 @@ public class PartTimeEmployee extends Employee {
 
     private BigDecimal hourlyWage;
 
-    protected PartTimeEmployee(String name, BigDecimal hourlyWage) {
+    protected PartTimeEmployee() {
+    }
+
+    public PartTimeEmployee(String name, BigDecimal hourlyWage) {
         super(name);
         this.hourlyWage = hourlyWage;
     }

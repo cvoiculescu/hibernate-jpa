@@ -8,6 +8,8 @@ import lombok.*;
 @ToString
 @Entity
 @Table(name = "employee")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "EmployeeType")
 public abstract class Employee {
 
     public Employee() {
