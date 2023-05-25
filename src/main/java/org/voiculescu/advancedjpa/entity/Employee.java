@@ -9,7 +9,7 @@ import lombok.experimental.SuperBuilder;
 @ToString
 @Entity
 @Table(name = "employee")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Employee {
 
     public Employee() {
