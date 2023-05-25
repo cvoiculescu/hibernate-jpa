@@ -50,13 +50,20 @@ public class StudentRepository {
         entityManager.persist(student);
     }
 
-    public void insertStudentAndCourseHardcoded(){
+    public void insertStudentAndCourseHardcoded() {
         Student student = new Student().setName("Test");
         Course course = new Course().setName("Microservices");
         entityManager.persist(student);
         entityManager.persist(course);
         student.addCourse(course);
         course.addStudent(student);
+        entityManager.persist(course);
+    }
+
+    public void insertStudentAndCourse(Student student, Course course) {
+        student.addCourse(course);
+        course.addStudent(student);
+        entityManager.persist(student);
         entityManager.persist(course);
     }
 
