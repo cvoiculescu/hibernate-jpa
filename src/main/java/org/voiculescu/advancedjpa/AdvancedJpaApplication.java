@@ -16,21 +16,11 @@ import java.math.BigDecimal;
 @SpringBootApplication
 public class AdvancedJpaApplication implements CommandLineRunner {
 
-    private final
-    EmployeeRepository employeeRepository;
-
-    public AdvancedJpaApplication(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
-
     public static void main(String[] args) {
         SpringApplication.run(AdvancedJpaApplication.class, args);
     }
 
     @Override
     public void run(String... args) throws Exception {
-        employeeRepository.save(new FullTimeEmployee("Jack", new BigDecimal(10000)));
-        employeeRepository.save(new PartTimeEmployee("Jill", new BigDecimal(50)));
-        log.info("All employees -> {}",employeeRepository.retrieveAllEmployees());
     }
 }
