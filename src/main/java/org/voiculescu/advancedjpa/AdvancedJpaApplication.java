@@ -1,9 +1,11 @@
 package org.voiculescu.advancedjpa;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.voiculescu.advancedjpa.entity.Employee;
 import org.voiculescu.advancedjpa.entity.FullTimeEmployee;
 import org.voiculescu.advancedjpa.entity.PartTimeEmployee;
 import org.voiculescu.advancedjpa.repository.EmployeeRepository;
@@ -29,6 +31,6 @@ public class AdvancedJpaApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         employeeRepository.save(new FullTimeEmployee("Jack", new BigDecimal(10000)));
         employeeRepository.save(new PartTimeEmployee("Jill", new BigDecimal(50)));
-        log.info("All employees -> {}",employeeRepository.retrieveAll());
+        log.info("All employees -> {}",employeeRepository.retrieveAllEmployees());
     }
 }

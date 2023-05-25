@@ -26,7 +26,7 @@ public class EmployeeRepository {
         return employee;
     }
 
-    public List<Employee> retrieveAll(){
+    public List<Employee> retrieveAllEmployees(){
         return entityManager.createQuery("select e from Employee e",Employee.class).getResultList();
     }
 
