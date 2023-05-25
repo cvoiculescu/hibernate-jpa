@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.transaction.annotation.Transactional;
 import org.voiculescu.advancedjpa.AdvancedJpaApplication;
 import org.voiculescu.advancedjpa.entity.Course;
 
@@ -36,6 +37,21 @@ class JPQLTest {
         TypedQuery<Course> query = em.createQuery("select c from Course c where c.students is empty", Course.class);
         List<Course> courses = query.getResultList();
         log.info("Courses -> {}",courses);
+    }
+
+    @Test
+    public void jpql_courses_without_at_least_2_students() {
+        TypedQuery<Course> query = em.createQuery("select c from Course c where size(c.students) >= 2", Course.class);
+        List<Course> courses = query.getResultList();
+        log.info("Courses -> {}",courses);
+    }
+
+    @Test
+    @Transactional
+    public void jpql_courses_orderBy_number_of_students() {
+        TypedQuery<Course> query = em.createQuery("select c from Course c order by size(c.students) desc", Course.class);
+        List<Course> courses = query.getResultList();
+        courses.forEach(course -> log.info("{}",course));
     }
 
 }
