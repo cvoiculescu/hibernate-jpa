@@ -54,4 +54,12 @@ class JPQLTest {
         courses.forEach(course -> log.info("{}",course));
     }
 
+    @Test
+    @Transactional
+    public void jpql_courses_like_50_steps() {
+        TypedQuery<Course> query = em.createQuery("select c from Course c where c.name like '%50%'", Course.class);
+        List<Course> courses = query.getResultList();
+        courses.forEach(course -> log.info("{}",course));
+    }
+
 }
