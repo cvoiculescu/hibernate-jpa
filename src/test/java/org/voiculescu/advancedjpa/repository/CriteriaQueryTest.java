@@ -75,4 +75,26 @@ class CriteriaQueryTest {
         log.info("TypedQuery -> {}", resultList);
     }
 
+    @Test
+    public void criteria_builder_all_course_without_students() {
+        //*
+        // 1
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Course> cq = cb.createQuery(Course.class);
+        // 2
+        Root<Course> courseRoot = cq.from(Course.class);
+        // 3,4 define predicates and add them
+        Predicate noStudents = cb.isEmpty(courseRoot.get("students"));
+        cq.where(noStudents);
+        // 5
+        TypedQuery<Course> query = em.createQuery(cq.select(courseRoot));
+
+        /*/
+        TypedQuery<Course> query = em.createQuery("select c from Course c where c.students is empty", Course.class);
+        //*/
+
+        List<Course> resultList = query.getResultList();
+        log.info("TypedQuery -> {}", resultList);
+    }
+
 }
