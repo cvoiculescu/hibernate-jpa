@@ -4,6 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.voiculescu.advancedjpa.AdvancedJpaApplication;
 import org.voiculescu.advancedjpa.entity.Course;
@@ -45,6 +48,19 @@ class CourseSpringDataRepositoryTest {
     public void sort() {
         Sort sortName = Sort.by(Sort.Direction.DESC, "name");
         repository.findAll(sortName).forEach(course -> log.info("{}", course));
+    }
+
+    @Test
+    public void pagination() {
+        PageRequest pageRequest = PageRequest.of(0, 3);
+        Page<Course> firstPage = repository.findAll(pageRequest);
+        log.info("First Page -> {}", firstPage.getContent());
+        Pageable secondRequest = firstPage.nextPageable();
+        Page<Course> secondPage = repository.findAll(secondRequest);
+        log.info("Second Page -> {}",secondPage.getContent());
+        Pageable nextOrLastPageable = secondPage.nextOrLastPageable();
+        Page<Course> nextOrLast = repository.findAll(nextOrLastPageable);
+        log.info("NextOrLast -> {}",nextOrLast.getContent());
     }
 
 }
