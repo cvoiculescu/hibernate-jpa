@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.voiculescu.advancedjpa.AdvancedJpaApplication;
 import org.voiculescu.advancedjpa.entity.Course;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -61,6 +62,12 @@ class CourseSpringDataRepositoryTest {
         Pageable nextOrLastPageable = secondPage.nextOrLastPageable();
         Page<Course> nextOrLast = repository.findAll(nextOrLastPageable);
         log.info("NextOrLast -> {}",nextOrLast.getContent());
+    }
+
+    @Test
+    public void findByName(){
+        List<Course> dummy1 = repository.findByName("Dummy1");
+        log.info("{}",dummy1);
     }
 
 }
