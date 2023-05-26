@@ -2,16 +2,14 @@ package org.voiculescu.advancedjpa.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.*;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.voiculescu.advancedjpa.AdvancedJpaApplication;
 import org.voiculescu.advancedjpa.entity.Course;
+import org.voiculescu.advancedjpa.entity.Student;
 
 import java.util.List;
 
@@ -91,6 +89,26 @@ class CriteriaQueryTest {
 
         /*/
         TypedQuery<Course> query = em.createQuery("select c from Course c where c.students is empty", Course.class);
+        //*/
+
+        List<Course> resultList = query.getResultList();
+        log.info("TypedQuery -> {}", resultList);
+    }
+
+    @Test
+    public void criteria_builder_join() {
+        //*
+        // 1
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Course> cq = cb.createQuery(Course.class);
+        // 2
+        Root<Course> courseRoot = cq.from(Course.class);
+        Join<Course, Student> students = courseRoot.join("students",JoinType.LEFT);
+        // 5
+        TypedQuery<Course> query = em.createQuery(cq.select(courseRoot));
+
+        /*/
+        TypedQuery<Course> query = em.createQuery("select c from Course c join c.students s", Course.class);
         //*/
 
         List<Course> resultList = query.getResultList();
