@@ -6,4 +6,7 @@ import org.voiculescu.advancedjpa.entity.Course;
 
 @Repository
 public interface CourseSpringDataRepository extends JpaRepository<Course,Long> {
+
+
+
 }
