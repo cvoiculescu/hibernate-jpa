@@ -24,6 +24,7 @@
 *.tagx          eol=lf
 *.xml           eol=lf
 *.yml           eol=lf
+*.sql           eol=lf
 
 # These files are binary and should be left untouched
 # (binary is a macro for -text -diff)
