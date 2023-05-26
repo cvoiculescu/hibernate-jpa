@@ -1,5 +1,6 @@
 package org.voiculescu.advancedjpa.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.Accessors;
@@ -38,6 +39,7 @@ public class Course {
             inverseJoinColumns = @JoinColumn(name = "student_id"))
     @Setter(AccessLevel.NONE)
     @ToString.Exclude
+    @JsonIgnore
     private List<Student> students = new ArrayList<>();
 
     public void addReview(Review review) {

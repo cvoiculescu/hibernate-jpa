@@ -2,12 +2,13 @@ package org.voiculescu.advancedjpa.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 import org.voiculescu.advancedjpa.entity.Course;
 
 import java.util.List;
 
-@Repository
+@RepositoryRestResource(path = "courses")
 public interface CourseSpringDataRepository extends JpaRepository<Course, Long> {
 
     List<Course> findByName(String name);
