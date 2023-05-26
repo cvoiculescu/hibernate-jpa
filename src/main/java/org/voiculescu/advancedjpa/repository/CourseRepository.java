@@ -13,7 +13,7 @@ import java.util.List;
 @Slf4j
 @Repository
 @Transactional
-public class CourseRepository {
+public class CourseRepository  {
 
     private final EntityManager em;
 
