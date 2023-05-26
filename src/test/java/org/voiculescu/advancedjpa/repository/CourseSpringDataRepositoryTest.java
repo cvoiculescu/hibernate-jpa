@@ -30,4 +30,14 @@ class CourseSpringDataRepositoryTest {
         assertFalse(byId.isPresent());
     }
 
+    @Test
+    public void playing_around_with_SpringDataRepository(){
+//        Course course = new Course().setName("My Course");
+//        repository.save(course);
+//        course.setName("My Course - Updated");
+//        repository.save(course);
+        repository.findAll().forEach(course -> log.info("{}",course));
+        log.info("{}",repository.count());
+    }
+
 }
