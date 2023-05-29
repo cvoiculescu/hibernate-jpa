@@ -1,21 +1,21 @@
-insert into course (id, name)
-values (10001, 'JPA in 50 Steps');
-insert into course (id, name)
-values (10002, 'JPA in 100 Steps');
-insert into course (id, name)
-values (10003, 'Spring in 50 steps');
-insert into course (id, name)
-values (10004, 'Dummy1');
-insert into course (id, name)
-values (10005, 'Dummy2');
-insert into course (id, name)
-values (10006, 'Dummy3');
-insert into course (id, name)
-values (10007, 'Dummy4');
-insert into course (id, name)
-values (10008, 'Dummy5');
-insert into course (id, name)
-values (10009, 'Dummy6');
+insert into course (id, name, is_deleted)
+values (10001, 'JPA in 50 Steps', false);
+insert into course (id, name, is_deleted)
+values (10002, 'JPA in 100 Steps',false);
+insert into course (id, name, is_deleted)
+values (10003, 'Spring in 50 steps', false);
+insert into course (id, name, is_deleted)
+values (10004, 'Dummy1', false);
+insert into course (id, name, is_deleted)
+values (10005, 'Dummy2', false);
+insert into course (id, name, is_deleted)
+values (10006, 'Dummy3', false);
+insert into course (id, name, is_deleted)
+values (10007, 'Dummy4', false);
+insert into course (id, name, is_deleted)
+values (10008, 'Dummy5', false);
+insert into course (id, name, is_deleted)
+values (10009, 'Dummy6', false);
 --
 insert into passport(id, number)
 values (40001, '40001');

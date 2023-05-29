@@ -1,6 +1,7 @@
 package org.voiculescu.advancedjpa.repository;
 
-import jakarta.persistence.EntityManager;
+import javax.persistence.EntityManager;
+
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +33,10 @@ class CourseRepositoryTest {
     @Transactional
     public void findByIdTest_firstLevelCache() {
         Course course = repository.findById(10001L);
-        log.info("First course retrieved {}",course.hashCode());
+        log.info("First course retrieved {}", course.hashCode());
         assertEquals("JPA in 50 Steps", course.getName());
         Course course1 = repository.findById(10001L);
-        log.info("First course retrieved again {}",course1.hashCode());
+        log.info("First course retrieved again {}", course1.hashCode());
         assertEquals("JPA in 50 Steps", course1.getName());
 
     }
@@ -49,7 +50,7 @@ class CourseRepositoryTest {
 
     @Test
     @DirtiesContext
-    public void saveTest(){
+    public void saveTest() {
 
         Course course = repository.save(new Course().setName("Test"));
         assertNotNull(course.getId());
@@ -58,27 +59,27 @@ class CourseRepositoryTest {
         course1.setName("Test");
         repository.save(course1);
         Course storedCourse1 = repository.findById(course1.getId());
-        assertEquals("Test",storedCourse1.getName());
+        assertEquals("Test", storedCourse1.getName());
     }
 
     @Test
     @DirtiesContext
-    public void playWith(){
+    public void playWith() {
         repository.playWithEntityManager();
     }
 
     @Test
     @Transactional
-    public void retrieveReviewsForCourse(){
+    public void retrieveReviewsForCourse() {
         Course course = repository.findById(10001L);
-        course.getReviews().forEach(review->log.info("{}",review));
+        course.getReviews().forEach(review -> log.info("{}", review));
     }
 
     @Test
     @Transactional
-    public void retrieveCourseForReview(){
-        Review review = entityManager.find(Review.class,50001L);
-        log.info("{}",review.getCourse());
+    public void retrieveCourseForReview() {
+        Review review = entityManager.find(Review.class, 50001L);
+        log.info("{}", review.getCourse());
     }
 
 }

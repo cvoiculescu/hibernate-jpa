@@ -3,6 +3,8 @@ package org.voiculescu.advancedjpa.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -17,6 +19,8 @@ import java.util.List;
 @AllArgsConstructor
 @NamedQueries(@NamedQuery(name = "query_get_all_courses", query = "select c from Course c"))
 @Cacheable
+@SQLDelete(sql = "update course set is_deleted=true where id=?")
+@Where(clause = "is_deleted=false")
 public class Course {
 
     @Id
@@ -57,5 +61,7 @@ public class Course {
     public void removeStudent(Student student) {
         students.remove(student);
     }
+
+    private boolean isDeleted;
 
 }
