@@ -6,9 +6,7 @@ import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -18,6 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @NamedQueries(@NamedQuery(name = "query_get_all_courses", query = "select c from Course c"))
+@Cacheable
 public class Course {
 
     @Id
