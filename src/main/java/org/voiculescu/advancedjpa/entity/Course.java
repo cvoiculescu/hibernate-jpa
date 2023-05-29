@@ -3,6 +3,7 @@ package org.voiculescu.advancedjpa.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.Accessors;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -21,6 +22,7 @@ import java.util.List;
 @Cacheable
 @SQLDelete(sql = "update course set is_deleted=true where id=?")
 @Where(clause = "is_deleted=false")
+@Slf4j
 public class Course {
 
     @Id
@@ -64,4 +66,9 @@ public class Course {
 
     private boolean isDeleted;
 
+    @PreRemove
+    public void preRemove() {
+        log.info("setting isDeleted=true");
+        isDeleted = true;
+    }
 }
