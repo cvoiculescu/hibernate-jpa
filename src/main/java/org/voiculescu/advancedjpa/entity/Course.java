@@ -18,7 +18,11 @@ import java.util.List;
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@NamedQueries(@NamedQuery(name = "query_get_all_courses", query = "select c from Course c"))
+@NamedQueries({@NamedQuery(name = "query_get_all_courses",
+            query = "select c from Course c"),
+        @NamedQuery(name = "query_get_all_courses_join_fetch",
+                query = "select c from Course c join fetch c.students s")}
+)
 @Cacheable
 @SQLDelete(sql = "update course set is_deleted=true where id=?")
 @Where(clause = "is_deleted=false")
