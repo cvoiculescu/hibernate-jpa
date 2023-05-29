@@ -2,6 +2,7 @@ package org.voiculescu.advancedjpa.repository;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.voiculescu.advancedjpa.AdvancedJpaApplication;
+import org.voiculescu.advancedjpa.entity.Address;
 import org.voiculescu.advancedjpa.entity.Course;
 import org.voiculescu.advancedjpa.entity.Passport;
 import org.voiculescu.advancedjpa.entity.Student;
@@ -69,6 +71,15 @@ class StudentRepositoryTest {
             Student student = new Student().setName("Test");
             Course course = new Course().setName("Microservices");
             repository.insertStudentAndCourse(student, course);
+        }
+
+        @Test
+        @Transactional
+        public void add_Student_Address() {
+            Student student = entityManager.find(Student.class, 20001L);
+            Address address = new Address("line1", "line2", "Brasov");
+            student.setAddress(address);
+            entityManager.flush();
         }
 
     }

@@ -37,6 +37,9 @@ public class Student {
     @Setter(AccessLevel.NONE)
     List<Course> courses = new ArrayList<>();
 
+    @Embedded
+    private Address address;
+
     public void addCourse(Course course){
         courses.add(course);
     }
