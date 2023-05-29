@@ -1,6 +1,6 @@
 package org.voiculescu.advancedjpa.entity;
 
-import jakarta.persistence.Entity;
+import javax.persistence.*;
 import lombok.*;
 import lombok.experimental.Accessors;
 

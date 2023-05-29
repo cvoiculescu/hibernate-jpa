@@ -1,10 +1,10 @@
 package org.voiculescu.advancedjpa.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.Accessors;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
