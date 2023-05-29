@@ -1,6 +1,7 @@
 package org.voiculescu.advancedjpa.entity;
 
 import javax.persistence.*;
+
 import lombok.*;
 import lombok.experimental.Accessors;
 
@@ -20,7 +21,8 @@ public class Review {
 
     private String description;
 
-    private String rating;
+    @Enumerated(EnumType.STRING)
+    private ReviewRating rating = ReviewRating.FIVE;
 
     @ManyToOne
     private Course course;

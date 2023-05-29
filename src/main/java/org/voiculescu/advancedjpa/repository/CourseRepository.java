@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.voiculescu.advancedjpa.entity.Course;
 import org.voiculescu.advancedjpa.entity.Review;
+import org.voiculescu.advancedjpa.entity.ReviewRating;
 
 import java.util.List;
 
@@ -62,8 +63,8 @@ public class CourseRepository  {
         Course course = em.find(Course.class, 10002L);
         log.info("Reviews: {}", course.getReviews());
         // create and set relationships
-        Review review1 = new Review().setRating("5").setDescription("Nice course").setCourse(course);
-        Review review2 = new Review().setRating("5").setDescription("Nice course").setCourse(course);
+        Review review1 = new Review().setRating(ReviewRating.FIVE).setDescription("Nice course").setCourse(course);
+        Review review2 = new Review().setRating(ReviewRating.FIVE).setDescription("Nice course").setCourse(course);
         course.addReview(review1);
         course.addReview(review2);
         // persist reviews
